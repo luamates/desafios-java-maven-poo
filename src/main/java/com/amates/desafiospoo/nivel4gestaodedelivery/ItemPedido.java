@@ -1,6 +1,6 @@
 package com.amates.desafiospoo.nivel4gestaodedelivery;
 
-import java.util.ArrayList;
+import java.util.SplittableRandom;
 
 public class ItemPedido {
     private Produto produto;
@@ -11,6 +11,11 @@ public class ItemPedido {
         this.produto = produto;
         this.quantidade = quantidade;
         this.subtotal = produto.getPreco() * quantidade;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%nProduto: %s | Qtd.: %d | R$ %.2f", this.produto.getNome(), this.quantidade, this.subtotal);
     }
 
     public Produto getProduto() {
