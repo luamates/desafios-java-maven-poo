@@ -7,15 +7,18 @@ public class Pedido {
 
     private final Cliente cliente;
     private final Double taxaEntrega;
+    private final Double multiplicadorMetodo;
     private final Double desconto;
 
-    public Pedido(Cliente cliente, Double taxaentrega, Integer metodo) {
+
+    public Pedido(Cliente cliente, Double taxaentrega, Integer metodo, Double desconto) {
         this.cliente = cliente;
         this.taxaEntrega = taxaentrega;
+        this.desconto = desconto;
 
-        if(metodo == 1) this.desconto = 1.05;
-        else if (metodo == 2) this.desconto = 0.97;
-        else this.desconto = (double) 1;
+        if(metodo == 1) this.multiplicadorMetodo = 1.05;
+        else if (metodo == 2) this.multiplicadorMetodo = 0.97;
+        else this.multiplicadorMetodo = (double) 1;
 
     }
 
@@ -47,10 +50,14 @@ public class Pedido {
     }
 
     public void mostrarPedido() {
-        System.out.printf("%n%nRESUMO DO PEDIDO: %nCliente: %s%nItens: ", cliente.getNome());
+        System.out.printf("%n%nRESUMO DO PEDIDO: %nCliente: %s%n", cliente.getNome());
+
+        if(!itens.isEmpty()){
+            System.out.printf("Itens: %n");
+        }
 
         for(int x = 0 ; x < itens.size() ; x++){
-            System.out.println("%nID " + x + " | " + itens.get(x).toString());
+            System.out.println("ID " + x + " | " + itens.get(x).toString());
         }
     }
 
@@ -64,7 +71,7 @@ public class Pedido {
     }
 
     public double calcularTotalFinal() {
-        return (calcularTotalBruto() + this.taxaEntrega) * this.desconto;
+        return (calcularTotalBruto() + this.taxaEntrega - this.desconto) * this.multiplicadorMetodo;
     }
 
 }

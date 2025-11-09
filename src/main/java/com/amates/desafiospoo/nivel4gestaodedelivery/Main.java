@@ -1,6 +1,5 @@
 package com.amates.desafiospoo.nivel4gestaodedelivery;
 
-import javax.imageio.stream.ImageOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,7 +48,7 @@ public class Main {
                 criarPedido(scanner);
                 break;
             case 4:
-                //modificarPedido(scanner); // fazer um outro metodo seletor e, do seletor, mandar para o modificar pedido com o indice do arrayList
+                selecionarPedido(scanner); // fazer um outro metodo seletor e, do seletor, mandar para o modificar pedido com o indice do arrayList
                 break;
             case 5:
                 return false;
@@ -106,19 +105,23 @@ public class Main {
         int pagamento = scanner.nextInt();
         scanner.nextLine();
 
-        Pedido pedido = new Pedido(clientes.get(id), taxa, pagamento);
+        System.out.printf("%nIndique o valor de desconto. Caso não se aplique, digite 0: ");
+        double desconto = scanner.nextDouble();
+
+        Pedido pedido = new Pedido(clientes.get(id), taxa, pagamento, desconto);
         pedidos.add(pedido);
 
-        System.out.printf("%nPedido (ID %d) criado com sucesso! %nDeseja selecionar itens? %n1 - Sim %n2 - Não %nSua seleção: ", clientes.size());
+        System.out.printf("%nPedido (ID %d) criado com sucesso! %nDeseja adicionar mais informações? %n1 - Sim %n2 - Não %nSua seleção: ", produtos.size());
 
         int option = scanner.nextInt();
-        if(option == 1) modificarPedido(scanner, clientes.size()); //chamar o modificar pedido para o úlitimo adicionado, que é o que acabou de fazer no met. criarPedido.
+        scanner.nextLine();
+        if(option == 1) modificarPedido(scanner, pedidos.size(), 1); //chamar o modificar pedido para o úlitimo adicionado, que é o que acabou de fazer no met. criarPedido.
 
     }
 
 
     public static void selecionarPedido(Scanner scanner){
-        for(int i = 0 ; i < produtos.size() ; i++){
+        for(int i = 0 ; i < pedidos.size() ; i++){
             System.out.printf("%n%naqui terá os pedidos!%n%n");
 
 
@@ -127,10 +130,12 @@ public class Main {
     }
 
 
-    public static void modificarPedido(Scanner scanner, int idPedido) {
-Pedido p = pedidos.get(idPedido);
+    public static void modificarPedido(Scanner scanner, int idPedido, int fonteDaSolicitacao) {
+        int posicaoPedido = idPedido - 1;
 
-        if(p.calcularTotalBruto() == 0){
+Pedido p = pedidos.get(posicaoPedido);
+
+        if(p.calcularTotalBruto() == 0 && fonteDaSolicitacao != 1){
             System.out.printf("%nAinda não há itens nesse pedido!");
 
         } else {
@@ -164,7 +169,7 @@ Pedido p = pedidos.get(idPedido);
                     break;
                 case 3:
                     p.mostrarPedido();
-                    System.out.println(p.toString());
+                    System.out.println(p);
                     break;
                 case 4:
                     return;
