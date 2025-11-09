@@ -47,7 +47,7 @@ public class Main {
                 criarPedido(scanner);
                 break;
             case 4:
-                selecionarPedido(scanner); // fazer um outro metodo seletor e, do seletor, mandar para o modificar pedido com o indice do arrayList
+                selecionarPedido(scanner);
                 break;
             case 5:
                 return false;
