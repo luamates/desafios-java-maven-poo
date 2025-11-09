@@ -15,7 +15,7 @@ public class ItemPedido {
 
     @Override
     public String toString() {
-        return String.format("%nProduto: %s | Qtd.: %d | R$ %.2f", this.produto.getNome(), this.quantidade, this.subtotal);
+        return String.format("Produto: %s | Qtd.: %d | R$ %.2f", this.produto.getNome(), this.quantidade, this.subtotal);
     }
 
     public Produto getProduto() {

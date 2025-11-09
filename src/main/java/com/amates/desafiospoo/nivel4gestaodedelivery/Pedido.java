@@ -9,10 +9,14 @@ public class Pedido {
     private final Double taxaEntrega;
     private final Double desconto;
 
-    public Pedido(Cliente cliente, Double taxaentrega, Double desconto){
+    public Pedido(Cliente cliente, Double taxaentrega, Integer metodo) {
         this.cliente = cliente;
         this.taxaEntrega = taxaentrega;
-        this.desconto = desconto;
+
+        if(metodo == 1) this.desconto = 1.05;
+        else if (metodo == 2) this.desconto = 0.97;
+        else this.desconto = (double) 1;
+
     }
 
     @Override
@@ -44,8 +48,9 @@ public class Pedido {
 
     public void mostrarPedido() {
         System.out.printf("%n%nRESUMO DO PEDIDO: %nCliente: %s%nItens: ", cliente.getNome());
-        for (ItemPedido item : itens) {
-            System.out.println(item.toString());
+
+        for(int x = 0 ; x < itens.size() ; x++){
+            System.out.println("%nID " + x + " | " + itens.get(x).toString());
         }
     }
 
@@ -59,11 +64,8 @@ public class Pedido {
     }
 
     public double calcularTotalFinal() {
-        return calcularTotalBruto() + this.taxaEntrega - this.desconto;
+        return (calcularTotalBruto() + this.taxaEntrega) * this.desconto;
     }
-
-
-
 
 }
 
