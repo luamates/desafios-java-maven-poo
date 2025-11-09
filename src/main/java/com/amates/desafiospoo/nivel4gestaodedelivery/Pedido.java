@@ -4,22 +4,19 @@ import java.util.ArrayList;
 
 public class Pedido {
     private ArrayList<ItemPedido> itens = new ArrayList<>();
-
     private final Cliente cliente;
     private final Double taxaEntrega;
     private final Double multiplicadorMetodo;
     private final Double desconto;
-
 
     public Pedido(Cliente cliente, Double taxaentrega, Integer metodo, Double desconto) {
         this.cliente = cliente;
         this.taxaEntrega = taxaentrega;
         this.desconto = desconto;
 
-        if(metodo == 1) this.multiplicadorMetodo = 1.05;
+        if (metodo == 1) this.multiplicadorMetodo = 1.05;
         else if (metodo == 2) this.multiplicadorMetodo = 0.97;
         else this.multiplicadorMetodo = (double) 1;
-
     }
 
     @Override
@@ -39,6 +36,11 @@ public class Pedido {
     }
 
     public void removerItem(String nomeProduto) {
+        if (itens.isEmpty()) {
+            System.out.printf("%nAINDA NÃO HÁ PRODUTOS NO PEDIDO!");
+            return;
+        }
+
         for (int i = 0; i < itens.size(); i++) {
             if (itens.get(i).getProduto().getNome().equalsIgnoreCase(nomeProduto)) {
                 itens.remove(i);
@@ -52,11 +54,11 @@ public class Pedido {
     public void mostrarPedido() {
         System.out.printf("%n%nRESUMO DO PEDIDO: %nCliente: %s%n", cliente.getNome());
 
-        if(!itens.isEmpty()){
+        if (!itens.isEmpty()) {
             System.out.printf("Itens: %n");
         }
 
-        for(int x = 0 ; x < itens.size() ; x++){
+        for (int x = 0; x < itens.size(); x++) {
             System.out.println("ID " + x + " | " + itens.get(x).toString());
         }
     }
@@ -74,5 +76,8 @@ public class Pedido {
         return (calcularTotalBruto() + this.taxaEntrega - this.desconto) * this.multiplicadorMetodo;
     }
 
-}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
+}

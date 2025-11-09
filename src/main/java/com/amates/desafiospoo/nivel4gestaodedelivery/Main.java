@@ -9,7 +9,6 @@ public class Main {
     static ArrayList<Produto> produtos = new ArrayList<>();
     static ArrayList<Pedido> pedidos = new ArrayList<>();
 
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -87,11 +86,10 @@ public class Main {
         System.out.printf("%nO cliente %s foi criado com sucesso!%n", cliente.getNome());
     }
 
-
     public static void criarPedido(Scanner scanner) {
         System.out.printf("%n%n===== CRIAÇÃO DE PEDIDO ===== %n");
 
-        for(int i = 0 ; i < clientes.size() ; i++){
+        for (int i = 0; i < clientes.size(); i++) {
             System.out.printf("%nID: %d | Nome: %s", i, clientes.get(i).getNome());
         }
 
@@ -111,43 +109,52 @@ public class Main {
         Pedido pedido = new Pedido(clientes.get(id), taxa, pagamento, desconto);
         pedidos.add(pedido);
 
-        System.out.printf("%nPedido (ID %d) criado com sucesso! %nDeseja adicionar mais informações? %n1 - Sim %n2 - Não %nSua seleção: ", produtos.size());
+        int idAtual = produtos.size() - 1;
+        System.out.printf("%nPedido (ID %d) criado com sucesso! %nDeseja adicionar mais informações? %n1 - Sim %n2 - Não %nSua seleção: ", idAtual);
 
         int option = scanner.nextInt();
         scanner.nextLine();
-        if(option == 1) modificarPedido(scanner, pedidos.size(), 1); //chamar o modificar pedido para o úlitimo adicionado, que é o que acabou de fazer no met. criarPedido.
-
+        if (option == 1) {
+            int selecao = pedidos.size() - 1;
+            modificarPedido(scanner, selecao, false); //chamar o modificar pedido para o úlitimo adicionado, que é o que acabou de fazer no met. criarPedido.
+        }
     }
 
-
-    public static void selecionarPedido(Scanner scanner){
-        for(int i = 0 ; i < pedidos.size() ; i++){
-            System.out.printf("%n%naqui terá os pedidos!%n%n");
-
-
+    public static void selecionarPedido(Scanner scanner) {
+        if (pedidos.isEmpty()) {
+            System.out.printf(("%nAINDA NÃO HÁ PEDIDOS!%n"));
+            return;
         }
 
+        System.out.printf("%nSelecione o pedido que deseja modificar: ");
+
+        for (int i = 0; i < pedidos.size(); i++) {
+            System.out.printf("%nID: %d | Nome: %s", i, pedidos.get(i).getCliente().getNome());
+        }
+
+        System.out.printf("%nDigite o ID: ");
+        int selecao = scanner.nextInt();
+        scanner.nextLine();
+
+        modificarPedido(scanner, selecao, true);
     }
 
+    public static void modificarPedido(Scanner scanner, int idPedido, boolean pedidoAntigo) {
+        Pedido p = pedidos.get(idPedido);
 
-    public static void modificarPedido(Scanner scanner, int idPedido, int fonteDaSolicitacao) {
-        int posicaoPedido = idPedido - 1;
-
-Pedido p = pedidos.get(posicaoPedido);
-
-        if(p.calcularTotalBruto() == 0 && fonteDaSolicitacao != 1){
+        if (p.calcularTotalBruto() == 0 && pedidoAntigo) {
             System.out.printf("%nAinda não há itens nesse pedido!");
 
         } else {
             p.mostrarPedido();
         }
 
-        while(true){
+        while (true) {
             System.out.printf("%nMenu do pedido %n1 - Adicionar item %n2 - Remover item %n3 - Extrato do pedido %n4 - Voltar ao menu principal%nSua seleção: ");
             int selection = scanner.nextInt();
             scanner.nextLine();
 
-            switch(selection){
+            switch (selection) {
                 case 1:
                     System.out.printf("%nADICIONAR ITEM DO MENU:");
                     mostrarMenu();
@@ -157,8 +164,12 @@ Pedido p = pedidos.get(posicaoPedido);
                     System.out.printf("%nDigite a quantidade: ");
                     int qtdItem = scanner.nextInt();
 
-                    p.adicionaritem(produtos.get(idItem), qtdItem);
-                    System.out.printf("%n%nItem foi adicionado!");
+                    try {
+                        p.adicionaritem(produtos.get(idItem), qtdItem);
+                        System.out.printf("%n%nItem foi adicionado!");
+                    } catch (Exception e) {
+                        System.out.printf("%n%nO item não foi localizado!!");
+                    }
                     break;
                 case 2:
                     System.out.printf("%nREMOVER ITEM DO PEDIDO:");
@@ -177,39 +188,13 @@ Pedido p = pedidos.get(posicaoPedido);
                     System.out.printf("%n%nOpção inválida!");
                     break;
             }
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
     }
 
-    public static void mostrarMenu(){
-        for(int i = 0 ; i < produtos.size() ; i++){
+    public static void mostrarMenu() {
+        for (int i = 0; i < produtos.size(); i++) {
             System.out.printf("%nID %d | Produto: %s | Preço: R$ %.2f", i, produtos.get(i).getNome(), produtos.get(i).getPreco());
         }
-
-
-
-
     }
-
-
-
-
-
-
-
-
 
 }
