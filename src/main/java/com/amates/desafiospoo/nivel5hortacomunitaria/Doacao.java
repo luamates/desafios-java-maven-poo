@@ -13,7 +13,16 @@ public class Doacao {
 
     }
 
+    public void adicionarItem(Planta planta, int quantidade){
+        listaDeItens.put(planta, quantidade);
+    }
 
+    public void mostrarItens(){
+        System.out.printf("%n%nItens adicionados nessa doação: %n");
+        for(Planta p : listaDeItens.keySet()){
+            System.out.printf("%nNome: %s | Quantidade: %d", p, listaDeItens.get(p));
+        }
+    }
 
     public HashMap<Planta, Integer> getListaDeItens() {
         return listaDeItens;
