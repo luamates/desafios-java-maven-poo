@@ -5,6 +5,12 @@ public class Planta {
     private Integer quantidadeEstocada;
     private String status;
 
+    public Planta(String nome, Integer quantidadeEstocada, String status){
+        this.nome = nome;
+        this.quantidadeEstocada = quantidadeEstocada;
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return String.format("%nNome: %s | Há %dKg em estoque | Atualmente, a planta está %s.", this.nome, this.quantidadeEstocada, this.status);

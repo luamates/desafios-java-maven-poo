@@ -5,6 +5,12 @@ public class Voluntario {
     private String funcao;
     private Integer horasTrabalhadas;
 
+    public Voluntario(String nome, String funcao, Integer horasTrabalhadas){
+        this.nome = nome;
+        this.funcao = funcao;
+        this.horasTrabalhadas = horasTrabalhadas;
+    }
+
     @Override
     public String toString() {
         return String.format("%nNome: %s | Função: %s | Trabalhou %d horas.", this.nome, this.funcao, this.horasTrabalhadas);
