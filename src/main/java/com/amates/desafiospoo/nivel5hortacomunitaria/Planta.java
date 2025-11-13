@@ -5,10 +5,14 @@ public class Planta {
     private Integer quantidadeEstocada;
     private String status;
 
-    public Planta(String nome, Integer quantidadeEstocada, String status){
+    public Planta(String nome, Integer quantidadeEstocada, Integer status){
         this.nome = nome;
         this.quantidadeEstocada = quantidadeEstocada;
-        this.status = status;
+
+        if(status == 1) this.status = "plantada";
+        else if(status == 2) this.status = "colhida";
+        else if(status == 3) this.status = "inativa";
+
     }
 
     @Override
