@@ -14,13 +14,12 @@ public class SistemHorta {
         Scanner scanner = new Scanner(System.in);
 
         boolean continuar = true;
-        while(continuar){
+        while (continuar) {
             continuar = mainMenu(scanner);
 
         }
 
         System.out.printf("");
-
 
 
     }
@@ -42,7 +41,7 @@ public class SistemHorta {
                 cadastrarPlanta(scanner);
                 break;
             case 2:
-
+                cadastrarVoluntario(scanner);
                 break;
             case 3:
 
@@ -85,14 +84,37 @@ public class SistemHorta {
     }
 
 
+    public static void cadastrarVoluntario(Scanner scanner) {
+        System.out.printf("%n%n===== CADASTRO DE VOLUNTÁRIO =====");
+        System.out.printf("%nDigite o nome do voluntário: ");
+        String nome = scanner.nextLine();
 
+        int horas;
+        while (true) {
+            System.out.printf("%nDigite as horas trabalhadas: ");
+            horas = scanner.nextInt();
+            scanner.nextLine();
 
+            if (horas < 0) System.out.printf("%nAs horas não podem ser negativas!");
+            else break;
+        }
 
+        int funcao;
+        while (true) {
+            System.out.printf("%nSelecione a função: %n1 - Plantio %n2 - Irrigação %n3 - Colheita");
+            funcao = scanner.nextInt();
+            scanner.nextLine();
 
+            if (funcao < 1 || funcao > 3) System.out.printf("%nSelecione uma função válida!");
+            else break;
+        }
 
+        Voluntario voluntario = new Voluntario(nome, funcao, horas);
 
-
-
+        voluntarios.add(voluntario);
+        System.out.printf("%nVoluntário %s cadastrado com sucesso!", voluntario.getNome());
+    }
 
 
 }
+

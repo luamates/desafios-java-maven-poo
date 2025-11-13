@@ -5,10 +5,14 @@ public class Voluntario {
     private String funcao;
     private Integer horasTrabalhadas;
 
-    public Voluntario(String nome, String funcao, Integer horasTrabalhadas){
+    public Voluntario(String nome, Integer funcao, Integer horasTrabalhadas){
         this.nome = nome;
-        this.funcao = funcao;
         this.horasTrabalhadas = horasTrabalhadas;
+
+        if(funcao == 1) this.funcao = "Plantio";
+        else if(funcao == 2) this.funcao = "Irrigação";
+        else this.funcao = "Colheita";
+
     }
 
     @Override
