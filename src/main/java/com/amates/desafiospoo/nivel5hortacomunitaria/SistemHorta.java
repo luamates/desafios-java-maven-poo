@@ -182,9 +182,18 @@ public class SistemHorta {
 
             System.out.printf("%nDigite o ID da planta para adicionar: ");
             int selecao = scanner.nextInt();
+            int quantidade;
 
-            System.out.printf("%nDigite a quantidade doada (em kg) da planta: ");
-            int quantidade = scanner.nextInt();
+            while (true) {
+                System.out.printf("%nDigite a quantidade doada (em kg) da planta: ");
+                quantidade = scanner.nextInt();
+
+                if (quantidade > plantas.get(selecao).getQuantidadeEstocada()) {
+                    System.out.printf("%n%nA quantidade é maior que o estoque disponível!!");
+                } else break;
+            }
+
+
 
 
             int atual = plantas.get(selecao).getQuantidadeEstocada();
@@ -204,6 +213,12 @@ public class SistemHorta {
     }
 
     public static void verDoacoes(Scanner scanner){
+        System.out.printf("%n%n ===== DOAÇÕES FINALIZADAS =====%n");
+
+        for(Doacao d : doacoes){
+            System.out.println(d);
+            d.mostrarItens();
+        }
 
     }
 

@@ -14,7 +14,7 @@ public class Doacao {
 
     @Override
     public String toString() {
-        return String.format("%n%nDoação à família: %s | Voluntário responsável: %s", nomeDaFamilia, voluntario);
+        return String.format("%n%nDoação à família: %s | Voluntário responsável: %s", nomeDaFamilia, voluntario.getNome());
     }
 
     public void adicionarItem(Planta planta, int quantidade){
