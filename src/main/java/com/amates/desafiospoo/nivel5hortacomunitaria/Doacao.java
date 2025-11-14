@@ -10,7 +10,11 @@ public class Doacao {
     public Doacao(String nome,Voluntario voluntario){
         this.nomeDaFamilia = nome;
         this.voluntario = voluntario;
+    }
 
+    @Override
+    public String toString() {
+        return String.format("%n%nDoação à família: %s | Voluntário responsável: %s", nomeDaFamilia, voluntario);
     }
 
     public void adicionarItem(Planta planta, int quantidade){
@@ -18,7 +22,7 @@ public class Doacao {
     }
 
     public void mostrarItens(){
-        System.out.printf("%n%nItens adicionados nessa doação: %n");
+        System.out.printf("%nItens adicionados nessa doação:");
         for(Planta p : listaDeItens.keySet()){
             System.out.printf("%nNome: %s | Quantidade: %d", p, listaDeItens.get(p));
         }
