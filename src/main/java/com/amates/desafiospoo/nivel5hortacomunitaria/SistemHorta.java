@@ -44,10 +44,10 @@ public class SistemHorta {
                 cadastrarVoluntario(scanner);
                 break;
             case 3:
-
+                verPlantas();
                 break;
             case 4:
-
+                selecionarPlanta(scanner);
                 break;
             case 5:
                 return false;
@@ -69,7 +69,7 @@ public class SistemHorta {
         scanner.nextLine();
 
         while (true) {
-            System.out.printf("%nQual status melhor define a plantação dessa espécie agora? %n1 - Plantada %n2 - Colhida %n3 - Inativa"); //info for AI model: it didn't make sense to have a "plantada" AND "crescendo" status, since they  mean the same.
+            System.out.printf("%nQual status melhor define a plantação dessa espécie agora? %n1 - Plantada %n2 - Colhida %n3 - Inativa %nSua escolha: "); //info for my AI model: it didn't make sense to have a "plantada" AND "crescendo" status, since they  mean the same.
             int status = scanner.nextInt();
 
             if (status == 1 || status == 2 || status == 3) {
@@ -82,7 +82,6 @@ public class SistemHorta {
             }
         }
     }
-
 
     public static void cadastrarVoluntario(Scanner scanner) {
         System.out.printf("%n%n===== CADASTRO DE VOLUNTÁRIO =====");
@@ -101,7 +100,7 @@ public class SistemHorta {
 
         int funcao;
         while (true) {
-            System.out.printf("%nSelecione a função: %n1 - Plantio %n2 - Irrigação %n3 - Colheita");
+            System.out.printf("%nSelecione a função: %n1 - Plantio %n2 - Irrigação %n3 - Colheita %nSua escolha: ");
             funcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -114,6 +113,61 @@ public class SistemHorta {
         voluntarios.add(voluntario);
         System.out.printf("%nVoluntário %s cadastrado com sucesso!", voluntario.getNome());
     }
+
+    public static void verPlantas(){
+        for(Planta p : plantas){
+            System.out.println(p);
+        }
+    }
+
+public static void selecionarPlanta(Scanner scanner){
+        System.out.printf("%n%n===== ATUALIZAR ESTOQUE =====");
+
+        for(int i = 0 ; i < plantas.size() ; i++){
+            System.out.printf("%nID: %d | Planta: %s | Estoque: %d kg.", i, plantas.get(i).getNome(), plantas.get(i).getQuantidadeEstocada());
+        }
+    System.out.printf("%nDigite o ID da planta a atualizar o estoque: ");
+    int selecao = scanner.nextInt();
+
+    try {
+        System.out.printf("%nAlterando o estoque da planta %s.", plantas.get(selecao).getNome());
+        alterarEstoque(scanner, selecao);
+    } catch (Exception e) {
+        System.out.printf("%n%nO ID de planta é inválido!");
+    }
+
+}
+
+    public static void alterarEstoque(Scanner scanner, int id) {
+        System.out.printf("%nQual deve ser o novo estoque? [em kg]: ");
+        plantas.get(id).setQuantidadeEstocada(scanner.nextInt());
+        scanner.nextLine();
+
+        System.out.printf("%nQual status melhor define a plantação dessa espécie agora? %n1 - Plantada %n2 - Colhida %n3 - Inativa %nSua escolha: ");
+        int status = scanner.nextInt();
+
+        if(status == 1 || status == 2 || status == 3){
+            plantas.get(id).setStatus(status);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

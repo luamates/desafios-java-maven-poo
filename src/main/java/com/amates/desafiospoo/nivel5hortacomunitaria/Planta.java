@@ -8,11 +8,7 @@ public class Planta {
     public Planta(String nome, Integer quantidadeEstocada, Integer status){
         this.nome = nome;
         this.quantidadeEstocada = quantidadeEstocada;
-
-        if(status == 1) this.status = "plantada";
-        else if(status == 2) this.status = "colhida";
-        else if(status == 3) this.status = "inativa";
-
+        setStatus(status);
     }
 
     @Override
@@ -40,7 +36,9 @@ public class Planta {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(Integer status) {
+        if(status == 1) this.status = "plantada";
+        else if(status == 2) this.status = "colhida";
+        else if(status == 3) this.status = "inativa";
     }
 }
