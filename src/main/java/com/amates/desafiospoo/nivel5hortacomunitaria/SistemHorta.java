@@ -55,7 +55,7 @@ public class SistemHorta {
                 cadastrarDoacao(scanner);
                 break;
             case 6:
-
+                verDoacoes(scanner);
                 break;
             case 7:
                 return false;
@@ -202,6 +202,13 @@ public class SistemHorta {
         System.out.println(doacao);
         doacao.mostrarItens();
     }
+
+    public static void verDoacoes(Scanner scanner){
+
+    }
+
+
+
 
 
 }

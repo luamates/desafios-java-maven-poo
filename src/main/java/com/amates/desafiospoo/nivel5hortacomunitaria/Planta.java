@@ -13,7 +13,7 @@ public class Planta {
 
     @Override
     public String toString() {
-        return String.format("%nNome: %s | Há %dKg em estoque | Atualmente, a planta está %s.", this.nome, this.quantidadeEstocada, this.status);
+        return String.format("%nNome: %s | Há %d Kg em estoque | Atualmente, a planta está %s.", this.nome, this.quantidadeEstocada, this.status);
     }
 
     public String getNome() {

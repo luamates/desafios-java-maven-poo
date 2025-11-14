@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Doacao {
     private String nomeDaFamilia;
-    private HashMap<Planta, Integer> listaDeItens;
+    private HashMap<Planta, Integer> listaDeItens = new HashMap<>();
     private Voluntario voluntario;
 
     public Doacao(String nome,Voluntario voluntario){
@@ -18,13 +18,15 @@ public class Doacao {
     }
 
     public void adicionarItem(Planta planta, int quantidade){
+
+
         listaDeItens.put(planta, quantidade);
     }
 
     public void mostrarItens(){
         System.out.printf("%nItens adicionados nessa doação:");
         for(Planta p : listaDeItens.keySet()){
-            System.out.printf("%nNome: %s | Quantidade: %d", p, listaDeItens.get(p));
+            System.out.printf("%nNome: %s | Quantidade: %d Kg", p.getNome(), listaDeItens.get(p));
         }
     }
 
