@@ -3,14 +3,12 @@ package com.amates.desafiospoo.nivel5hortacomunitaria;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SistemHorta {
+public class SistemaHorta {
     static ArrayList<Planta> plantas = new ArrayList<>();
     static ArrayList<Voluntario> voluntarios = new ArrayList<>();
     static ArrayList<Doacao> doacoes = new ArrayList<>();
 
-
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
 
         boolean continuar = true;
@@ -18,10 +16,7 @@ public class SistemHorta {
             continuar = mainMenu(scanner);
 
         }
-
-        System.out.printf("");
-
-
+        System.out.printf("%n%nEncerrando o sistema.");
     }
 
     public static boolean mainMenu(Scanner scanner) {
@@ -175,7 +170,7 @@ public class SistemHorta {
         Doacao doacao = new Doacao(familia, voluntarios.get(voluntarioResponsavel));
         doacoes.add(doacao);
 
-        while(true){
+        while (true) {
             for (int i = 0; i < plantas.size(); i++) {
                 System.out.printf("%nID: %d | Planta: %s | Estoque: %d kg.", i, plantas.get(i).getNome(), plantas.get(i).getQuantidadeEstocada());
             }
@@ -193,9 +188,6 @@ public class SistemHorta {
                 } else break;
             }
 
-
-
-
             int atual = plantas.get(selecao).getQuantidadeEstocada();
 
             plantas.get(selecao).setQuantidadeEstocada(atual - quantidade);
@@ -204,7 +196,7 @@ public class SistemHorta {
             System.out.printf("%nAdicionado com sucesso! %nDeseja adicionar mais itens? %n1 - Sim %n2 - Não (finalizar e bloquear doação) %nSua seleção: ");
             int adicao = scanner.nextInt();
 
-            if(adicao == 2) break;
+            if (adicao == 2) break;
         }
 
         System.out.printf("%n%nResumo da doação: ");
@@ -212,19 +204,14 @@ public class SistemHorta {
         doacao.mostrarItens();
     }
 
-    public static void verDoacoes(Scanner scanner){
+    public static void verDoacoes(Scanner scanner) {
         System.out.printf("%n%n ===== DOAÇÕES FINALIZADAS =====%n");
 
-        for(Doacao d : doacoes){
+        for (Doacao d : doacoes) {
             System.out.println(d);
             d.mostrarItens();
         }
 
     }
 
-
-
-
-
 }
-

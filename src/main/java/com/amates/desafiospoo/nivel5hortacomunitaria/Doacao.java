@@ -7,7 +7,7 @@ public class Doacao {
     private HashMap<Planta, Integer> listaDeItens = new HashMap<>();
     private Voluntario voluntario;
 
-    public Doacao(String nome,Voluntario voluntario){
+    public Doacao(String nome, Voluntario voluntario) {
         this.nomeDaFamilia = nome;
         this.voluntario = voluntario;
     }
@@ -17,15 +17,15 @@ public class Doacao {
         return String.format("%n%nDoação à família: %s | Voluntário responsável: %s", nomeDaFamilia, voluntario.getNome());
     }
 
-    public void adicionarItem(Planta planta, int quantidade){
+    public void adicionarItem(Planta planta, int quantidade) {
 
 
         listaDeItens.put(planta, quantidade);
     }
 
-    public void mostrarItens(){
+    public void mostrarItens() {
         System.out.printf("%nItens adicionados nessa doação:");
-        for(Planta p : listaDeItens.keySet()){
+        for (Planta p : listaDeItens.keySet()) {
             System.out.printf("%nNome: %s | Quantidade: %d Kg", p.getNome(), listaDeItens.get(p));
         }
     }
